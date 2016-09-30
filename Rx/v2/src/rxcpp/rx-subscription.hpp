@@ -59,7 +59,7 @@ public:
         : unsubscribe_call(std::move(s))
     {
     }
-    void unsubscribe() const {
+    void unsubscribe() {
         unsubscribe_call();
     }
 };
