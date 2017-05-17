@@ -129,9 +129,7 @@ set(RX_SOURCES
 source_group("src" FILES ${RX_SOURCES})
 
 add_library(RxCpp SHARED ${RX_SOURCES})
-SET_TARGET_PROPERTIES(RxCpp PROPERTIES LINKER_LANGUAGE CXX)
-
-set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY TRUE CACHE BOOL "Don't require all projects to be built in order to install" FORCE)
-
-install(DIRECTORY ${RXCPP_DIR}/Rx/v2/src/rxcpp/ DESTINATION include/rxcpp
-        FILES_MATCHING PATTERN "*.hpp")
+set_target_properties(RxCpp PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(RxCpp PROPERTIES PUBLIC_HEADER ${RX_SOURCES})
+set(INSTALL_INCLUDE_DIR include CACHE PATH "Installation directory for header files")
+install(DIRECTORY "${RXCPP_DIR}/Rx/v2/src/rxcpp/" DESTINATION "${INSTALL_INCLUDE_DIR}/rxcpp" PATTERN "${RXCPP_DIR}/Rx/v2/src/rxcpp/*")
