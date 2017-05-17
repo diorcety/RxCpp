@@ -128,7 +128,10 @@ set(RX_SOURCES
 # Grouping all the source files puts them into a virtual folder in Visual Studio
 source_group("src" FILES ${RX_SOURCES})
 
-add_library(RxCpp SHARED ${RX_SOURCES})
+add_library(RxCpp SHARED ${RX_SOURCES} ${RXCPP_DIR}/Rx/v2/src/rxcpp/dummy.cpp)
+if (NOT BUILD_SHARED_LIBS)
+  target_compile_definitions(RxCpp PRIVATE _LIB)
+endif()
 set_target_properties(RxCpp PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(RxCpp PROPERTIES PUBLIC_HEADER ${RX_SOURCES})
 set(INSTALL_INCLUDE_DIR include CACHE PATH "Installation directory for header files")
